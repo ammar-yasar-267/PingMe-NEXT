@@ -1,101 +1,128 @@
-import Image from "next/image";
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { Button } from "../components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
+import { cn } from "../lib/utils"
+import { Bot, MessageSquare, BarChart3 } from 'lucide-react'
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [mounted, setMounted] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-cyan-400 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/cyber-grid.svg')] bg-center opacity-10"></div>
+      
+      <header className="container mx-auto px-4 py-8 relative z-10">
+        <nav className="flex justify-between items-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl font-bold text-yellow-400"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+            PingMe
+          </motion.div>
+          <div className="space-x-4">
+            <Link href="/login" className="text-cyan-400 hover:text-yellow-400 transition-colors">Login</Link>
+            <Button variant="outline" className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 transition-colors">Sign Up</Button>
+          </div>
+        </nav>
+      </header>
+
+      <main className="container mx-auto px-4 py-16 relative z-10">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-5xl font-bold mb-4 text-yellow-400">
+            Enter the <span className="text-cyan-400">Digital Realm</span>
+          </h1>
+          <p className="text-xl text-gray-400 mb-8">Where AI and human communication converge</p>
+          <Button size="lg" className="bg-cyan-400 hover:bg-yellow-400 text-gray-900 transition-colors">
+            Jack In
+          </Button>
+        </motion.section>
+
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="grid md:grid-cols-3 gap-8 mb-16"
+        >
+          <FeatureCard 
+            icon={<Bot className="w-12 h-12 text-yellow-400" />}
+            title="AI Forge"
+            description="Craft digital entities with unparalleled ease"
+          />
+          <FeatureCard 
+            icon={<MessageSquare className="w-12 h-12 text-cyan-400" />}
+            title="Neural Link"
+            description="Seamless thought-to-text communication"
+          />
+          <FeatureCard 
+            icon={<BarChart3 className="w-12 h-12 text-pink-500" />}
+            title="Overseer Module"
+            description="Command your digital empire effortlessly"
+          />
+        </motion.section>
+
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="text-center"
+        >
+          <h2 className="text-3xl font-bold mb-4 text-pink-500">
+            Upgrade Your Reality
+          </h2>
+          <p className="text-gray-400 mb-8">Transcend the limits of traditional communication</p>
+          <Button variant="outline" size="lg" className="border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-gray-900 transition-colors">
+            Explore More
+          </Button>
+        </motion.section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="container mx-auto px-4 py-8 text-center text-gray-600 relative z-10">
+        <p>&copy; 2023 PingMe. All rights reserved.</p>
       </footer>
     </div>
-  );
+  )
 }
+
+function FeatureCard({ icon, title, description }) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <Card className="bg-gray-800 border-gray-700 hover:border-cyan-400 transition-colors">
+        <CardHeader>
+          <motion.div 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 300, delay: 0.2 }}
+            className="mb-4"
+          >
+            {icon}
+          </motion.div>
+          <CardTitle className="text-xl font-bold text-yellow-400">{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription className="text-gray-400">{description}</CardDescription>
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
+
