@@ -15,7 +15,9 @@ export function useAuth() {
   const login = useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
       const { data } = await api.post('/auth/login', credentials);
-      localStorage.setItem('token', data.token);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('token', data.token);
+      }
       return data.user;
     },
   });
@@ -23,7 +25,9 @@ export function useAuth() {
   const register = useMutation({
     mutationFn: async (credentials: RegisterCredentials) => {
       const { data } = await api.post('/auth/register', credentials);
-      localStorage.setItem('token', data.token);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('token', data.token);
+      }
       return data.user;
     },
   });
@@ -34,12 +38,14 @@ export function useAuth() {
       const { data } = await api.get('/auth/profile');
       return data;
     },
-    enabled: !!localStorage.getItem('token'),
+    enabled: typeof window !== 'undefined' && !!localStorage.getItem('token'),
   });
 
   const logout = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
   };
 
   return {
