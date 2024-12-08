@@ -33,7 +33,9 @@ export default function Home() {
           </motion.div>
           <div className="space-x-4">
             <Link href="/login" className="text-cyan-400 hover:text-yellow-400 transition-colors">Login</Link>
-            <Button variant="outline" className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 transition-colors">Sign Up</Button>
+            <Link href="/register" className="text-cyan-400 hover:text-yellow-400 transition-colors">
+              <Button variant="outline" className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 transition-colors">Sign Up</Button>
+            </Link>
           </div>
         </nav>
       </header>
@@ -49,9 +51,11 @@ export default function Home() {
             Enter the <span className="text-cyan-400">Digital Realm</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8">Where AI and human communication converge</p>
-          <Button size="lg" className="bg-cyan-400 hover:bg-yellow-400 text-gray-900 transition-colors">
-            Jack In
-          </Button>
+          <Link href="/dashboard">
+            <Button size="lg" className="bg-cyan-400 hover:bg-yellow-400 text-gray-900 transition-colors">
+              Dashboard
+            </Button>
+          </Link>
         </motion.section>
 
         <motion.section 
