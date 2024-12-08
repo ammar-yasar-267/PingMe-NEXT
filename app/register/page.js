@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,7 +22,7 @@ export default function Register() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
-      alert("Registration successful!");
+      alert("Registration successful");
         // Redirect to login page after registration
         router.push("/login");
     } catch (err) {

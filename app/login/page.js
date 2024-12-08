@@ -38,6 +38,7 @@ export default function Login() {
         <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email" className="w-full p-2 bg-gray-700 rounded" />
         <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Password" className="w-full p-2 bg-gray-700 rounded" />
         <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 p-2 rounded">Login</button>
+        <p className="text-center">Don&apos;t have an account? <a href="/register" className="text-cyan-400 hover:underline">Register</a></p>
       </form>
     </div>
   );

@@ -15,19 +15,30 @@ export default function ChatRooms() {
 
   const fetchChatRooms = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/chatter/chat-rooms");
-      if (!res.ok) throw new Error("Failed to fetch chat rooms");
-      const data = await res.json();
-      setRooms(data);
-      setError(null);
+        const token = localStorage.getItem("token"); // Retrieve the token from localStorage
+        if (!token) throw new Error("User is not authenticated");
+
+        const res = await fetch("http://localhost:5000/api/chatter/chat-rooms", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch chat rooms");
+        
+        const data = await res.json();
+        setRooms(data);
+        setError(null);
     } catch (error) {
-      console.error("Error fetching chat rooms:", error);
-      setError("Unable to load chat rooms");
-      setRooms([]);
+        console.error("Error fetching chat rooms:", error);
+        setError("Unable to load chat rooms");
+        setRooms([]);
     } finally {
-      setIsLoadingRooms(false);
+        setIsLoadingRooms(false);
     }
-  };
+};
+
 
   const fetchUsers = async () => {
     try {
